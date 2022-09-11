@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Lot</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="" id="app">
+
+        <h1>{{title}}</h1>
+
+        <div class="parkinglot-container">
+            <h1>A</h1>
+            <div class="entry-col">
+                <h1>B</h1>
+                <div class="slots-container">
+                    <div @click="value[1].car != null ? {click: calculateToUnpark(key)} : {};" v-for="value, key in parkSlots" :class="[{occupied: value[1].car != null}, 'parkslot']">
+                        <span>{{key}}</span><br>
+                        <span v-if="value[1].slotType == 0">sp</span>
+                        <span v-if="value[1].slotType == 1">mp</span>
+                        <span v-if="value[1].slotType == 2">lp</span>
+                    </div>
+                </div>
+            </div>
+            <h1>C</h1>
+        </div>
+        <button @click="toggleModal">Park</button>
+
+        <div v-if="showModal" @click.self="toggleModal" class="backdrop">
+            <div class="modal">
+                <h1>Park Vehicle</h1>
+                <div>
+                    <label for="entry">Entry</label>
+                    <select ref="entryinput" name="entry" id="entry">
+                        <option v-for="entry in entryPoints" :value="entry">{{entry}}</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="vehicle">Vehicle</label>
+                    <select ref="cartypeinput" name="vehicle" id="vehicle">
+                        <option default value=0>Small vehicle</option>
+                        <option value=1>Medium vehicle</option>
+                        <option value=2>Large vehicle</option>
+                    </select>
+                </div>
+                <button @click="parkCar">Park</button>
+            </div>
+        </div>
+
+        <div v-if="unparkModal" class="backdrop" @click.self="toggleUnparkModal">
+            <div class="modal">
+                <div>
+                    <h1>Unpark vehicle?</h1>
+                    <div>
+                        <h4>Day/s: {{days}}</h4>
+                        <h4>Hour/s: {{hours}}</h4>
+                        <h4>Minutes: {{minutes}}</h4>
+                        <h4>Seconds: {{seconds}}</h4>
+                        <h4>Total charge: {{payment}}</h4>
+                    </div>
+                    <div>
+                        <button @click="unpark(currSlot)">Yes</button>
+                        <button @click="toggleUnparkModal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="app.js"></script>
+</body>
+</html>
