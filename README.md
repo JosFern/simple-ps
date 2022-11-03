@@ -1,2 +1,2 @@
 # simple-ps
-# Using HTML CSS JAVASCRIPT & VUE JS
+# Using HTML CSS Javascript & cdn Vue JS
